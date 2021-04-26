@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+    <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+
+    <script src="https://unpkg.com/element-ui/lib/index.js"></script>
+
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+
+        }
+
+        .app{
+            height: auto;
+        }
+
+        .container{
+            width: auto;
+            min-width: 896px;
+            min-height: 800px;
+            margin: 10px 0;
+            background-color: #f5f6f7;
+        }
+
+        .container .container_left{
+            float:left;
+            position: fixed;
+            top:70px;
+            left: 20px;
+            width:220px;
+        }
+
+        .container .container_right{
+            float: left;
+            margin-left: 250px;
+            min-width: 1000px;
+            /*min-height: 800px;*/
+            min-height: 800px;
+            background-color: #fff;
+        }
+
+        .el-menu-item{
+            margin-top: 0;
+            padding-top: 0;
+            background-color: #fff;
+        }
+
+        .el-link{
+            color:black;
+            text-align: center;
+            display: block;
+        }
+
+        .el-badge{
+            top: 3px;
+        }
+        .clearfloat{clear:both;height:0;font-size: 1px;line-height: 0px;}
+
+    </style>
+</head>
+<body class="global">
+
+    <div id="app" class="app" style="background-color: #f5f6f7; clear: both">
+
+        <!--header -->
+        <div class="header" style="background-color: black; width: 100%;">
+            <el-menu :default-active="activeIndex" class="el-menu-demo" mode="horizontal" @select="handleSelect">
+                <el-menu-item index="1">处理中心</el-menu-item>
+                <el-submenu index="2">
+                    <template slot="title">我的工作台</template>
+                    <el-menu-item index="2-1">选项1</el-menu-item>
+                    <el-menu-item index="2-2">选项2</el-menu-item>
+                    <el-menu-item index="2-3">选项3</el-menu-item>
+                    <el-submenu index="2-4">
+                        <template slot="title">选项4</template>
+                        <el-menu-item index="2-4-1">选项1</el-menu-item>
+                        <el-menu-item index="2-4-2">选项2</el-menu-item>
+                        <el-menu-item index="2-4-3">选项3</el-menu-item>
+                    </el-submenu>
+                </el-submenu>
+                <el-menu-item index="3" disabled>消息中心</el-menu-item>
+                <el-menu-item index="4"><a href="https://www.ele.me" target="_blank">订单管理</a></el-menu-item>
+
+                <el-menu-item index="5" style="float: right">
+                    <a href="https://www.ele.me" target="_blank">订单管理</a>
+                </el-menu-item>
+
+                <el-badge is-dot>
+                    <el-submenu index="2">
+                        <template slot="title">我的工作台</template>
+                        <el-menu-item index="2-1">选项1</el-menu-item>
+                        <el-menu-item index="2-2">选项2</el-menu-item>
+                        <el-menu-item index="2-3">选项3</el-menu-item>
+                        <el-submenu index="2-4">
+                            <template slot="title">选项4</template>
+                            <el-menu-item index="2-4-1">选项1</el-menu-item>
+                            <el-menu-item index="2-4-2">选项2</el-menu-item>
+                            <el-menu-item index="2-4-3">选项3</el-menu-item>
+                        </el-submenu>
+                    </el-submenu>
+                </el-badge>
+                <el-dropdown trigger="click">
+                    <span class="el-dropdown-link">
+                        点我查看<i class="el-icon-caret-bottom el-icon--right"></i>
+                    </span>
+                    <el-dropdown-menu slot="dropdown">
+                        <el-dropdown-item class="clearfix">
+                            评论
+                            <el-badge class="mark" :value="12" />
+                        </el-dropdown-item>
+                        <el-dropdown-item class="clearfix">
+                            回复
+                            <el-badge class="mark" :value="3" />
+                        </el-dropdown-item>
+                    </el-dropdown-menu>
+                </el-dropdown>
+            </el-menu>
+        </div>
+
+        <div id="user_center_container" class="container">
+
+            <div class="container_left">
+                <el-menu :default-active="activeIndex" class="el-menu-demo" mode="vertical" >
+                    <el-menu-item index="1-1">
+                        <el-link type="primary"
+                                 href="http://www.baidu.com" class="baidu" target="container_right">博文创作</el-link>
+                    </el-menu-item>
+
+                    <el-submenu index="2">
+                        <template slot="title">
+                            <span style="color:black;text-align: center;display: block;">
+                                我的工作台</span>
+                        </template>
+                        <el-menu-item index="2-1">
+                            选项1</el-menu-item>
+                        <el-menu-item index="2-2">选项2</el-menu-item>
+                        <el-menu-item index="2-3">选项3</el-menu-item>
+                    </el-submenu>
+
+                </el-menu>
+
+                <el-menu :default-active="activeIndex" class="el-menu-demo" mode="vertical" >
+                    <el-menu-item index="1-1">
+                        <el-link type="primary"
+                                 href="http://www.baidu.com" class="baidu" target="container_right">博文创作</el-link>
+                    </el-menu-item>
+                </el-menu>
+            </div>
+
+            <iframe name="container_right" class="container_right" id="displayBar" frameborder="0"
+                    src="http://www.baidu.com">
+            </iframe>
+        </div>
+
+        <div class="clearfloat"></div>
+
+        <!-- footer -->
+        <div class="footer" style="height: 100px; width: 100px; border: 1px solid black">
+
+        </div>
+    </div>
+</body>
+
+<script>
+    var app = new Vue({
+        el:"#app",
+
+        data:{
+            activeIndex: '1-1',
+        }
+    });
+
+    function findScroller(element){
+        element.onscroll = function (){console.log(element)};
+        Array.from(element.children).forEach(findScroller);
+    }
+
+    findScroller(document.body);
+</script>
+</html>
